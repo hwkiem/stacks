@@ -57,8 +57,8 @@ class BuildWorks(models.Model):
     title_without_series = models.TextField(null = True)
     isbn = models.BigIntegerField(null = True)
     isbn13 = models.BigIntegerField(null = True)
-    text_reviews_count = models.IntegerField(null = True)
-    ratings_count = models.IntegerField(null = True)
+    total_text_reviews_count = models.IntegerField(null = True)
+    total_ratings_count = models.IntegerField(null = True)
     average_rating = models.FloatField(null = True)
     series = models.TextField(null = True)
     country_code = models.TextField(null = True)
@@ -78,6 +78,16 @@ class BuildWorks(models.Model):
     publisher = models.TextField(null = True)
     edition_information = models.TextField(null = True)
     similar_books = models.TextField(null = True)
+
+
+class Playlists(models.Model):
+    playlist_id = models.IntegerField()
+    playlist_name = models.TextField()
+    # user_id
+    # title
+    # author
+    # date
+    work_id = models.IntegerField()
 
 
 # class BuildShelves(models.Model):

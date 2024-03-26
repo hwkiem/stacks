@@ -1,10 +1,10 @@
 import pandas as pd
 from sqlalchemy import create_engine
 import gzip
-from user_secrets import PG_USER, PG_PASS
+from nm_secrets import PG_USER, PG_PASS
 
 def main():
-    engine = create_engine(f'postgresql+psycopg2://{PG_USER}:{PG_PASS}@localhost/engine')
+    engine = create_engine(f'postgresql+psycopg2://{PG_USER}:{PG_PASS}@engine-api-db.cxcc4u6cay2w.us-east-2.rds.amazonaws.com/postgres')
     
     file_name = 'data/goodreads_book_authors.json.gz'
 

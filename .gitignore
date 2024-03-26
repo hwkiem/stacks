@@ -1,3 +1,7 @@
 user_secrets.py
-__pycache__
-data
+__pycache__/
+data/
+migrations/
+build/
+import/
+nm_secrets.py

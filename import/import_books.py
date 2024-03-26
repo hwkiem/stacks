@@ -1,12 +1,12 @@
 import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.types import *
-from user_secrets import PG_USER, PG_PASS
+from nm_secrets import PG_USER, PG_PASS
 # import sqlite3 as sql
 import gzip
 
 def main():
-    engine = create_engine(f'postgresql+psycopg2://{PG_USER}:{PG_PASS}@localhost/engine')
+    engine = create_engine(f'postgresql+psycopg2://{PG_USER}:{PG_PASS}@engine-api-db.cxcc4u6cay2w.us-east-2.rds.amazonaws.com/postgres')
     file_name = 'data/goodreads_books.json.gz'
 
     with gzip.open(file_name) as fin:
@@ -77,6 +77,10 @@ def main():
 
             # row by row... annoying
             for _, row in temp.iterrows():
+                # only english books for now
+                if 'en' not in row['language_code']:
+                    continue
+
                 work_id = row['work_id']
                 book_id = row['book_id']
 
@@ -86,9 +90,10 @@ def main():
 
                 # get tags (for new works)
                 if work_id not in seen_works:
-                    temp_tag = pd.DataFrame(row['popular_shelves']).assign(
-                        work_id = work_id
-                    ).rename(columns={'name': 'tag_name'})
+                    temp_tag = pd.DataFrame(row['popular_shelves']).\
+                        assign(work_id = work_id).\
+                        rename(columns={'name': 'tag_name'}).\
+                        drop_duplicates(['tag_name', 'work_id', 'count'])
                     tags = pd.concat([tags, temp_tag])
 
                     seen_works.add(work_id)
@@ -100,6 +105,8 @@ def main():
 
             temp[int_cols] = temp[int_cols].apply(pd.to_numeric, errors='coerce')
             temp[float_cols] = temp[float_cols].apply(pd.to_numeric, errors='coerce')
+
+            temp = temp[temp['language_code'].str.contains('en')]
 
             temp.to_sql(
                 'engine_api_books', 

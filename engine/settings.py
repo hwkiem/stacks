@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from user_secrets import PG_USER, PG_PASS
+from nm_secrets import PG_USER, PG_PASS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-bpy#f81acglhw=fqnkwsbn@xsr-*@^iyw*q2)ndi55$j&32cv*'
+SECRET_KEY = 'django-insecure-zx=qf@wp_@(v2vl#jl@z*y_m5+cb@3_9yqp+!pr37ovs!#osl('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'engine.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'engine',
+        'NAME': 'postgres',
         'USER': PG_USER,
         'PASSWORD': PG_PASS,
-        'HOST': 'localhost',
+        'HOST': 'engine-api-db.cxcc4u6cay2w.us-east-2.rds.amazonaws.com',
         'PORT': '5432'
     }
 }
