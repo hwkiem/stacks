@@ -23,6 +23,12 @@ locals {
   role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.role_name}"
 }
 
+resource "spacelift_space" "development" {
+  name = "development"
+  parent_space_id = "root"
+  description = "The development space."
+}
+
 resource "spacelift_stack" "stacks" {
   administrative    = true
   autodeploy        = true
@@ -30,6 +36,7 @@ resource "spacelift_stack" "stacks" {
   description       = "Provisions resources for Stacks"
   name              = "Stacks"
   project_root      = "terraform/stacks"
+  space_id = spacelift_space.development.id
   repository        = "stacks"
   terraform_version = "1.5.7"
 }
