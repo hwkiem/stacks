@@ -8,7 +8,9 @@ terraform {
 
 provider "spacelift" {}
 
-provider "aws" {}
+provider "aws" {
+  region = "us-west-2"
+}
 
 resource "spacelift_stack" "stacks" {
   administrative    = true
