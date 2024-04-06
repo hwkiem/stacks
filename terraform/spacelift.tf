@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 provider "spacelift" {}
+=======
+terraform {
+  required_providers {
+    spacelift = {
+      source = "spacelift-io/spacelift"
+    }
+  }
+}
+>>>>>>> cdc89ef (testing spacelift configurations)
 
 resource "spacelift_stack" "stacks" {
   administrative    = true
@@ -15,7 +25,11 @@ resource "spacelift_stack" "stacks" {
 data "aws_caller_identity" "current" {}
 
 locals {
+<<<<<<< HEAD
   role_name = "my_role"
+=======
+  role_name = "SpaceliftRole"
+>>>>>>> cdc89ef (testing spacelift configurations)
   role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.role_name}"
 }
 
