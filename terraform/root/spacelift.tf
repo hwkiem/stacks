@@ -27,6 +27,7 @@ resource "spacelift_space" "development" {
   name = "development"
   parent_space_id = "root"
   description = "The development space."
+  inherit_entities = true
 }
 
 resource "spacelift_stack" "stacks-dev" {
