@@ -8,6 +8,8 @@ terraform {
 
 provider "spacelift" {}
 
+provider "aws" {}
+
 resource "spacelift_stack" "stacks" {
   administrative    = true
   autodeploy        = true
