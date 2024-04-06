@@ -27,7 +27,7 @@ resource "spacelift_stack" "stacks" {
 data "aws_caller_identity" "current" {}
 
 locals {
-  role_name = "SpaceliftRole"
+  role_name = "StacksSpaceLift"
   role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.role_name}"
 }
 
