@@ -36,7 +36,7 @@ resource "spacelift_aws_integration" "this" {
 
 data "spacelift_aws_integration_attachment_external_id" "my_stack" {
   integration_id = spacelift_aws_integration.this.id
-  stack_id       = spacelift_stack.stacks.stack_id
+  stack_id       = spacelift_stack.stacks.id
   read           = true
   write          = true
 }
@@ -63,7 +63,7 @@ resource "aws_iam_role_policy_attachment" "this" {
 # Attach the integration to any stacks or modules that need to use it
 resource "spacelift_aws_integration_attachment" "my_stack" {
   integration_id = spacelift_aws_integration.this.id
-  stack_id       = spacelift_stack.stacks.stack_id
+  stack_id       = spacelift_stack.stacks.id
   read           = true
   write          = true
 
