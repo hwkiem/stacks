@@ -29,17 +29,17 @@ resource "spacelift_space" "development" {
   description = "The development space."
 }
 
-resource "spacelift_stack" "stacks" {
-  administrative    = true
-  autodeploy        = true
-  branch            = "main"
-  description       = "Provisions resources for Stacks"
-  name              = "Stacks"
-  project_root      = "terraform/stacks"
-  space_id = spacelift_space.development.id
-  repository        = "stacks"
-  terraform_version = "1.5.7"
-}
+# resource "spacelift_stack" "stacks-dev" {
+#   administrative    = true
+#   autodeploy        = true
+#   branch            = "main"
+#   description       = "Provisions resources for Stacks"
+#   name              = "Stacks-Dev"
+#   project_root      = "terraform/stacks"
+#   space_id = spacelift_space.development.id
+#   repository        = "stacks"
+#   terraform_version = "1.5.7"
+# }
 
 resource "spacelift_aws_integration" "this" {
   name = local.role_name
@@ -73,15 +73,15 @@ resource "aws_iam_role_policy_attachment" "this" {
   policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
 }
 
-# Attach the integration to any stacks or modules that need to use it
-resource "spacelift_aws_integration_attachment" "my_stack" {
-  integration_id = spacelift_aws_integration.this.id
-  stack_id       = spacelift_stack.stacks.id
-  read           = true
-  write          = true
+# # Attach the integration to any stacks or modules that need to use it
+# resource "spacelift_aws_integration_attachment" "my_stack" {
+#   integration_id = spacelift_aws_integration.this.id
+#   stack_id       = spacelift_stack.stacks.id
+#   read           = true
+#   write          = true
 
-  # The role needs to exist before we attach since we test role assumption during attachment.
-  depends_on = [
-    aws_iam_role.this
-  ]
-}
+#   # The role needs to exist before we attach since we test role assumption during attachment.
+#   depends_on = [
+#     aws_iam_role.this
+#   ]
+# }
