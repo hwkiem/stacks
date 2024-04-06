@@ -10,6 +10,8 @@ terraform {
 }
 >>>>>>> cdc89ef (testing spacelift configurations)
 
+provider "spacelift" {}
+
 resource "spacelift_stack" "stacks" {
   administrative    = true
   autodeploy        = true
