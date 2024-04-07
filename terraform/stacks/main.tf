@@ -6,7 +6,7 @@ locals {
     vpc_cidr = "10.0.0.0/16"
     max_azs = 2
     azs = data.aws_availability_zones.available
-    vpc_azs = slice(local.all_azs.names, 0, min(local.max_azs, length(local.all_azs.names)))
+    vpc_azs = slice(local.azs.names, 0, min(local.max_azs, length(local.azs.names)))
 }
 
 data "aws_availability_zones" "available" {
