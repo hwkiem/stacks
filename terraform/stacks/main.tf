@@ -4,7 +4,7 @@ provider "aws" {
 
 locals {
     vpc_cidr = "10.0.0.0/16"
-    azs = data.aws_availability_zones.available
+    azs = data.aws_availability_zones.available.names
 }
 
 data "aws_availability_zones" "available" {
