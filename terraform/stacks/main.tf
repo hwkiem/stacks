@@ -4,7 +4,7 @@ provider "aws" {
 
 locals {
     vpc_cidr = "10.0.0.0/16"
-    azs = data.aws_availability_zones.available
+    azs = data.aws_availability_zones.available.names
 }
 
 data "aws_availability_zones" "available" {
@@ -14,7 +14,7 @@ data "aws_availability_zones" "available" {
 resource "aws_vpc" "main" {
     cidr_block = local.vpc_cidr
     tags = {
-        Name = "Stacks-${count.index + 1}"
+        Name = "Stacks-VPC"
     }
 }
 
