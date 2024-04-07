@@ -72,7 +72,7 @@ resource "aws_iam_role" "this" {
 # For our example we're granting PowerUserAccess, but you can restrict this to whatever you need.
 resource "aws_iam_role_policy_attachment" "this" {
   role       = aws_iam_role.this.name
-  policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
 # Attach the integration to any stacks or modules that need to use it
