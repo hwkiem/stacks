@@ -31,7 +31,7 @@ resource "spacelift_space" "development" {
 }
 
 resource "spacelift_stack" "stacks-dev" {
-  administrative    = true
+  administrative    = false
   autodeploy        = true
   branch            = "main"
   description       = "Provisions resources for Stacks"

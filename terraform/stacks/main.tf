@@ -14,7 +14,7 @@ data "aws_availability_zones" "available" {
 resource "aws_vpc" "main" {
     cidr_block = local.vpc_cidr
     tags = {
-        Name = "Stacks-${count.index + 1}"
+        Name = "Stacks-VPC"
     }
 }
 
